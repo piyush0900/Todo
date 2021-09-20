@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'practical';
+  isAdd:boolean=false;
+  addTodo(){
+    this.isAdd = true;
+  }
 }

@@ -1,0 +1,57 @@
+<div class="row">
+<div class="col-md-12">        
+    <div *ngIf="isAdd">  
+        <div class="col-md-4">
+        <div class="form-group">
+        <label class="form-control-label">Date</label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dateSelected">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">Name</label>
+        <input type="text" [(ngModel)]="taskName" class="form-control" id="taskname" name="taskname"/>        
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">Status</label>
+        <select
+        [(ngModel)]="status"
+        name="todostatus"
+        class="form-control"
+    >
+        <option value="active">Active</option>
+        <option value="inactive">InActive</option>
+    </select>
+    </div>
+    <br/>
+    <div class="form-group">
+        <button class="btn btn-primary login-btn" *ngIf="!isUpdate" (click)="addTodo()">Submit</button>
+        <button class="btn btn-primary login-btn" *ngIf="isUpdate" (click)="updateTodo()">Update</button>
+    </div>
+</div>         
+</div>
+    <button class="btn btn-primary" *ngIf="!isAdd" (click)="add()">Create</button>
+    <div class="table-responsive">
+        <table class="table mrg-b-0">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th class="text-center">Action</th>            
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Admin Pannel- DIV-1969 - Uniformity issue in displaying the decimal values in the Order details screen -->
+                <tr *ngFor="let todo of todos;let i = index">
+                    <td>{{todo.date | date:'MM/dd/yyyy'}}</td>
+                    <td>{{todo.name}}</td>
+                    <td>{{todo.status}}</td>
+                    <td class="text-center"><button class="btn btn-primary" (click)="populateTodo(todo,i)">Update</button>&nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-danger" (click)="deleteTodo(i)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
